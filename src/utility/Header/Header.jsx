@@ -1,52 +1,80 @@
 import React from 'react';
 import Logo from '../../components/Logo/Logo';
-import { Link, NavLink } from 'react-router';
-import { FaArrowAltCircleUp } from 'react-icons/fa';
+import { NavLink } from 'react-router';
 import { GoArrowUpRight } from 'react-icons/go';
 
 const Header = () => {
-    
-    const Links = <>
-        <li className='text-[16px] font-medium'><NavLink to={"/services"}>Services</NavLink></li>
-        <li className='text-[16px] font-medium'><NavLink to={"/coverage"}>Coverage</NavLink></li>
-        <li className='text-[16px] font-medium'><NavLink to={"/about"}>About Us</NavLink></li>
-        <li className='text-[16px] font-medium'><NavLink to={"/pricing"}>Pricing</NavLink></li>
-        <li className='text-[16px] font-medium'><NavLink to={"/blog"}>Blog</NavLink></li>
-        <li className='text-[16px] font-medium'><NavLink to={"/contact"}>Contact</NavLink></li>
-    </>
+  const Links = [
+    { name: "Services", to: "/services" },
+    { name: "Coverage", to: "/coverage" },
+    { name: "About Us", to: "/about" },
+    { name: "Pricing", to: "/pricing" },
+    { name: "Blog", to: "/blog" },
+    { name: "Contact", to: "/contact" },
+  ];
 
-    return (
-        <header>
-          <div className="navbar bg-base-100 shadow-sm rounded-2xl px-8 py-4">
-            <div className="navbar-start">
-              <div className="dropdown">
-                <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
-                </div>
-                <ul
-                  tabIndex="-1"
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                      {Links}
-                </ul>
-              </div>
-              <NavLink to={"/"} className="text-xl"><Logo></Logo></NavLink>
-            </div>
-            <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1">
-                  {Links}
-              </ul>
-            </div>
-            <div className="navbar-end flex gap-2">
-              <NavLink to={"/sign-in"} className="btn px-6 py-5 font-bold text-[#0B0B0B] bg-white rounded-2xl text-[20px]">Sign In</NavLink>
-              <NavLink to={"/sign-out"} className="btn px-6 py-5 font-bold text-[#0B0B0B] bg-primary rounded-2xl text-[20px]">Sign Up</NavLink>
-              {/* <FaArrowAltCircleUp className='rotate-45 h-10 w-10 -ms-2.5' /> */}
-              <div className='h-10 w-10 bg-secondary font-bold text-primary -ms-2.5 rounded-4xl flex items-center justify-center'>
-                <GoArrowUpRight />
-              </div>
-            </div>
+  return (
+    <header>
+      <div className="navbar bg-base-100 shadow-sm rounded-2xl px-4 sm:px-8 py-3 sm:py-4">
+        
+        {/* Navbar Start */}
+        <div className="navbar-start">
+          {/* Mobile Dropdown */}
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden p-2 sm:p-3 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+              </svg>
+            </label>
+            <ul tabIndex={-1} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
+              {Links.map((link, idx) => (
+                <li key={idx} className="text-sm sm:text-base font-medium">
+                  <NavLink to={link.to}>{link.name}</NavLink>
+                </li>
+              ))}
+            </ul>
           </div>
-        </header>
-    );
+
+          {/* Logo */}
+          <NavLink to={"/"} className="ml-2 sm:ml-4 text-xl sm:text-2xl">
+            <Logo />
+          </NavLink>
+        </div>
+
+        {/* Navbar Center */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {Links.map((link, idx) => (
+              <li key={idx} className="text-sm sm:text-base font-medium mx-1 sm:mx-2">
+                <NavLink to={link.to}>{link.name}</NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Navbar End */}
+        <div className="navbar-end flex items-center gap-2 sm:gap-3">
+          <NavLink 
+            to={"/sign-in"} 
+            className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-white rounded-2xl"
+          >
+            Sign In
+          </NavLink>
+          <NavLink 
+            to={"/sign-up"} 
+            className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-primary rounded-2xl"
+          >
+            Sign Up
+          </NavLink>
+
+          {/* Arrow Icon */}
+          <div className="h-8 w-8 sm:h-10 sm:w-10 bg-secondary rounded-2xl flex items-center justify-center">
+            <GoArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;
