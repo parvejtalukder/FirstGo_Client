@@ -17,9 +17,7 @@ const Header = () => {
     <header>
       <div className="navbar bg-base-100 shadow-sm rounded-2xl px-4 sm:px-8 py-3 sm:py-4">
         
-        {/* Navbar Start */}
         <div className="navbar-start">
-          {/* Mobile Dropdown */}
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden p-2 sm:p-3 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,13 +33,11 @@ const Header = () => {
             </ul>
           </div>
 
-          {/* Logo */}
           <NavLink to={"/"} className="ml-2 sm:ml-4 text-xl sm:text-2xl">
             <Logo />
           </NavLink>
         </div>
 
-        {/* Navbar Center */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {Links.map((link, idx) => (
@@ -52,7 +48,6 @@ const Header = () => {
           </ul>
         </div>
 
-        {/* Navbar End */}
         <div className="navbar-end flex items-center gap-2 sm:gap-3">
           <NavLink 
             to={"/sign-in"} 
@@ -67,7 +62,6 @@ const Header = () => {
             Sign Up
           </NavLink>
 
-          {/* Arrow Icon */}
           <div className="h-8 w-8 sm:h-10 sm:w-10 bg-secondary rounded-2xl flex items-center justify-center">
             <GoArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
           </div>

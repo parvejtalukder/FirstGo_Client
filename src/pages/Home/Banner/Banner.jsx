@@ -15,7 +15,6 @@ const Banner = () => {
         <div key={index} className="relative">
           <img src={banner} className="w-full object-cover" />
 
-          {/* Overlay Buttons */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col sm:flex-row gap-4 items-center">
             
             <div className="flex items-center gap-2">

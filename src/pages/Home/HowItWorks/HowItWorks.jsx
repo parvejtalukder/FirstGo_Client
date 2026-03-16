@@ -24,12 +24,11 @@ const HowItWorks = () => {
   return (
     <section className="bg-transparent py-12 md:py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col gap-10">
-        {/* Heading */}
+       
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-900 text-center lg:text-left">
           How it Works
         </h2>
 
-        {/* Grid of Features */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, idx) => (
             <FeatureCard

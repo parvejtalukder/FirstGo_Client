@@ -19,7 +19,6 @@ const Marchant = () => {
     return (
         <div className='bg-secondary px-6 py-10 md:px-12 lg:px-20 lg:py-16 rounded-3xl flex flex-col lg:flex-row items-center gap-10'>
             
-            {/* Text Section */}
             <div className='w-full lg:w-3/5 flex flex-col gap-4 text-center lg:text-left'>
                 <h2 className='font-bold text-2xl md:text-3xl lg:text-4xl text-white'>
                     Merchant and Customer Satisfaction is Our First Priority
@@ -36,7 +35,6 @@ const Marchant = () => {
                 </div>
             </div>
 
-            {/* Image Section */}
             <div className='w-full lg:w-2/5 flex justify-center'>
                 <img
                     src={Merchanta}
