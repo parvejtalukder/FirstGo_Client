@@ -5,6 +5,10 @@ import Button from '../../../components/Button/Button';
 import Arrow from '../../../components/Arrow/Arrow';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import Brands from '../Brands/Brands';
+import Review from '../Review/Review';
+
+const reviewPromise = fetch("/review.json")
+        .then(res => res.json())
 
 const Home = () => {
 
@@ -13,6 +17,7 @@ const Home = () => {
         name: "More FAQ",
         bg: "bg-primary"
     }
+
 
     return (
         <div className='my-10'>
@@ -27,6 +32,8 @@ const Home = () => {
             </div>
             {/* Marchent  */}
             <Marchant></Marchant>
+            {/* Review  */}
+            <Review reviewPromise={reviewPromise}></Review>
             {/* FAQ  */}
             <div className='flex justify-center items-center pt-10'>
                 <Button BTN={FAQ}></Button> 

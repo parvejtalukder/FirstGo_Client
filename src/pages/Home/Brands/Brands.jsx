@@ -9,7 +9,7 @@ import Star from '../../../assets/brands/star.png';
 import 'swiper/css';
 
 const Brands = () => {
-  const logos = [Amazon, Casio, Amazon, Star, Randstad, Amazon, Moonstar, Randstad, Star];
+  const logos = [Amazon, Casio, Amazon, Star, Randstad, Amazon, Moonstar, Randstad, Star, Amazon, Casio, Amazon, Star, Randstad, Amazon, Moonstar, Randstad, Star];
 
   return (
     <Swiper
