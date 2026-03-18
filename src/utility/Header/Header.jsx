@@ -67,16 +67,16 @@ const Header = () => {
 
         <div className="navbar-end flex items-center gap-2 sm:gap-3">
           <NavLink 
-            to={"/sign-in"} 
+            to={"/login"} 
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-white rounded-2xl"
           >
-            Sign In
+            LogIn
           </NavLink>
           <NavLink 
-            to={"/sign-up"} 
+            to={"/register"} 
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-primary rounded-2xl"
           >
-            Sign Up
+            Register
           </NavLink>
 
           <div className="h-8 w-8 sm:h-10 sm:w-10 bg-secondary rounded-2xl flex items-center justify-center">
