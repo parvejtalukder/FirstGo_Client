@@ -1,6 +1,6 @@
-# 🚚 ZapShift Client (Frontend)
+# 🚚 First Go Client (Frontend)
 
-ZapShift Client is the **frontend application** of the ZapShift Parcel Management System.  
+First Go Client is the **frontend application** of the First Go Parcel Management System.  
 It provides a modern, fast, and responsive interface for users to **book parcels, track deliveries, and manage shipments** easily.
 
 This project is built using **React + Vite** for fast performance and modern development workflow.
@@ -10,7 +10,7 @@ This project is built using **React + Vite** for fast performance and modern dev
 # 🔗 Repository
 
 Frontend Source Code:  
-https://github.com/parvejtalukder/ZapShiftClient
+https://github.com/parvejtalukder/First GoClient
 
 ---
 
@@ -63,8 +63,8 @@ src/
 Clone the repository and install dependencies.
 
 ```bash
-git clone https://github.com/parvejtalukder/ZapShiftClient.git
-cd ZapShiftClient
+git clone https://github.com/parvejtalukder/First GoClient.git
+cd First GoClient
 npm install
 ```
 
