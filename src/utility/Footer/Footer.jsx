@@ -8,7 +8,7 @@ const Footer = () => {
               <aside>
                 <Logo></Logo>
                 <p className="font-bold">
-                  ZapShift Ltd.
+                  First Go Ltd.
                   <br />
                   Providing reliable tech since 1992
                 </p>

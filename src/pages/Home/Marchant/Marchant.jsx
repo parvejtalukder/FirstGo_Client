@@ -12,7 +12,7 @@ const Marchant = () => {
 
     const EarnWithZip = {
         url: "earn-with-zap",
-        name: "Earn With ZapShift",
+        name: "Earn With First Go",
         bg: "bg-white"
     }
 

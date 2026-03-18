@@ -5,7 +5,7 @@ import { GoArrowUpRight } from 'react-icons/go';
 
 const Header = () => {
   const Links = [
-    { name: "Services", to: "/services" },
+    { name: "Home", to: "/" },
     { name: "Coverage", to: "/coverage" },
     { name: "About Us", to: "/about" },
     { name: "Pricing", to: "/pricing" },
@@ -24,10 +24,23 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
-            <ul tabIndex={-1} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
+            <ul
+              tabIndex={-1}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+            >
               {Links.map((link, idx) => (
-                <li key={idx} className="text-sm sm:text-base font-medium">
-                  <NavLink to={link.to}>{link.name}</NavLink>
+                <li key={idx}>
+                  <NavLink
+                    to={link.to}
+                    end={link.to === "/"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "bg-[#caeb66] text-blue-950 rounded-xl px-4 py-2"
+                        : "hover:bg-base-200 rounded-xl px-4 py-2"
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -42,7 +55,11 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">
             {Links.map((link, idx) => (
               <li key={idx} className="text-sm sm:text-base font-medium mx-1 sm:mx-2">
-                <NavLink to={link.to}>{link.name}</NavLink>
+                <NavLink className={({ isActive }) =>
+                      isActive
+                        ? "bg-[#caeb66] text-blue-950 rounded-xl px-4 py-2"
+                        : "hover:bg-base-200 rounded-xl px-4 py-2"
+                    } to={link.to}>{link.name}</NavLink>
               </li>
             ))}
           </ul>
