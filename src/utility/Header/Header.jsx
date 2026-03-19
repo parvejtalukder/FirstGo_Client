@@ -2,8 +2,12 @@ import React from 'react';
 import Logo from '../../components/Logo/Logo';
 import { NavLink } from 'react-router';
 import { GoArrowUpRight } from 'react-icons/go';
+import useAuth from '../../hooks/useAuth';
 
 const Header = () => {
+
+  const { user, logOut } = useAuth();
+
   const Links = [
     { name: "Home", to: "/" },
     { name: "Coverage", to: "/coverage" },
@@ -12,6 +16,16 @@ const Header = () => {
     { name: "Blog", to: "/blog" },
     { name: "Contact", to: "/contact" },
   ];
+
+  const handleLogOut = () => {
+    logOut()
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <header>
@@ -66,7 +80,8 @@ const Header = () => {
         </div>
 
         <div className="navbar-end flex items-center gap-2 sm:gap-3">
-          <NavLink 
+          {
+            !user && <div className='flex items-center gap-2 sm:gap-3'>          <NavLink 
             to={"/login"} 
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-white rounded-2xl"
           >
@@ -77,7 +92,21 @@ const Header = () => {
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-primary rounded-2xl"
           >
             Register
-          </NavLink>
+          </NavLink></div>
+          }
+          {
+            user && <div> <button  onClick={handleLogOut}
+            
+            className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-white rounded-2xl"
+          >
+            LogOut
+          </button> <NavLink to={"/be-rider"}  
+            
+            className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-primary rounded-2xl"
+          >
+            Be Rider
+          </NavLink> </div>
+          }
 
           <div className="h-8 w-8 sm:h-10 sm:w-10 bg-secondary rounded-2xl flex items-center justify-center">
             <GoArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
