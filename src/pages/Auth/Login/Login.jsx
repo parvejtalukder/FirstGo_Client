@@ -1,17 +1,20 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
 
         const { register, handleSubmit, formState: { errors } } = useForm();
         const { signInUser } = useAuth();
+        const location = useLocation();
+        const navigate = useNavigate();
     
         const handleLogin = (data) => {
             signInUser(data.email, data.password)
                 .then(res => {
                     console.log(res.user);
+                    navigate(location?.state || "/");
                 })
                 .catch(err => {
                     console.log(err);
@@ -56,7 +59,7 @@ const Login = () => {
                         Login
                     </button>
                 </fieldset>
-                <h2>Already have an account? <span><Link to={"/login"} className='text-blue-500'>Login</Link></span></h2>
+                <h2>Already have an account? <span><Link state={location?.state} to={"/register"} className='text-blue-500'>Register</Link></span></h2>
             </form>
         </div>
     );

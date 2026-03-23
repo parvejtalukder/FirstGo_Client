@@ -6,6 +6,9 @@ import Coverage from "../pages/Coverage/Coverage";
 import AuthLayout from "../layouts/Auth/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
+import PrivateRoute from "./PrivateRoute";
+import BeARider from "../pages/BeARider/BeARider";
+// import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -15,11 +18,14 @@ export const router = createBrowserRouter([
     children: [
         {index: true, Component: Home},
         {
+          path: "be-rider",
+          element: <PrivateRoute><BeARider></BeARider></PrivateRoute>
+        },
+        {
           path: "/coverage", 
           Component: Coverage,
           loader: () => fetch("/locations.json").then(res => res.json())
         }
-        // {errorElement: <p>404</p>}
     ]
   },
   {

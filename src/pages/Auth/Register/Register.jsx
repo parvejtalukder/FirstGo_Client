@@ -1,16 +1,56 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
+import axios from 'axios';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Register = () => {
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser } = useAuth();
+    const { registerUser, updateUser } = useAuth();
 
     const handleRegistration = (data) => {
+
+        console.log(data);
+        const profileImage = data.photo[0];
+
         registerUser(data.email, data.password)
             .then(res => {
+
+                // image proccess
                 console.log(res);
+                const formData = new FormData();
+                formData.append("image", profileImage);
+
+                const apiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imageHost}`;
+                axios.post(apiUrl, formData)
+                .then(resImg => {
+                    console.log(resImg.data);
+
+                    const userProfile = {
+                        displayName: data.name,
+                        photoURL: resImg.data.data.display_url
+
+                    }
+
+                    updateUser(userProfile)
+                    .then(updateRes => {
+                        console.log("Image uploaded!", updateRes);
+                        navigate(location?.state || "/");
+                    })
+                    .catch(uploadErr => {
+                        console.log(uploadErr);
+                    })
+
+
+                })
+                .catch(errImg => {
+                    console.log(errImg);
+                } )
+
             })
             .catch(err => {
                 console.log(err);
@@ -24,6 +64,31 @@ const Register = () => {
                 className="w-full max-w-sm sm:max-w-md"
             >
                 <fieldset className="fieldset space-y-4 w-full">
+
+                    <h2 className='font-bold text-3xl'>Registration</h2>
+                    
+                    <label className="label block">Name</label>
+                    <input
+                        type="text"
+                        {...register("name", { required: true })}
+                        className="input w-full"
+                        placeholder="Your Name"
+                    />
+                    {errors.name?.type == "required" && (
+                        <p className='text-red-600 text-sm'>No Name Found...</p>
+                    )}
+                    
+                    <label className="label block">Photo</label>
+                    <input
+                        type="file"
+                        {...register("photo", { required: true })}
+                        className="file-input w-full"
+                        placeholder="Your Photo"
+                    />
+                    {errors.photo?.type == "required" && (
+                        <p className='text-red-600 text-sm'>No Name Found...</p>
+                    )}
+
                     <label className="label block">Email</label>
                     <input
                         type="email"
@@ -32,7 +97,7 @@ const Register = () => {
                         placeholder="Email"
                     />
                     {errors.email?.type == "required" && (
-                        <p className='text-red-600 text-sm'>No Email Found</p>
+                        <p className='text-red-600 text-sm'>No Email Found...</p>
                     )}
 
                     <label className="label block">Password</label>
@@ -62,6 +127,8 @@ const Register = () => {
                     <button className="btn btn-neutral mt-4 w-full">
                         Register
                     </button>
+                    <label htmlFor="">Already have account? <span><Link state={location?.state} className='text-blue-600' to={"/login"}>Login</Link></span></label>
+
                 </fieldset>
             </form>
         </div>
