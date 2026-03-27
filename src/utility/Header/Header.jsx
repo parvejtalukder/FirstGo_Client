@@ -13,6 +13,14 @@ const Header = () => {
     { name: "Coverage", to: "/coverage" },
     { name: "About Us", to: "/about" },
     { name: "Pricing", to: "/pricing" },
+    { name: "Send Percel", to: "/send-percel" },
+    { name: "Contact", to: "/contact" },
+  ];
+  const LinksLoggedIn = [
+    { name: "Home", to: "/" },
+    { name: "Coverage", to: "/coverage" },
+    { name: "Send Percel", to: "/send-percel" },
+    { name: "Track Percel", to: "/track-percel" },
     { name: "Blog", to: "/blog" },
     { name: "Contact", to: "/contact" },
   ];
@@ -67,7 +75,16 @@ const Header = () => {
 
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {Links.map((link, idx) => (
+            {!user && Links.map((link, idx) => (
+              <li key={idx} className="text-sm sm:text-base font-medium mx-1 sm:mx-2">
+                <NavLink className={({ isActive }) =>
+                      isActive
+                        ? "bg-[#caeb66] text-blue-950 rounded-xl px-4 py-2"
+                        : "hover:bg-base-200 rounded-xl px-4 py-2"
+                    } to={link.to}>{link.name}</NavLink>
+              </li>
+            ))}
+            {user && LinksLoggedIn.map((link, idx) => (
               <li key={idx} className="text-sm sm:text-base font-medium mx-1 sm:mx-2">
                 <NavLink className={({ isActive }) =>
                       isActive

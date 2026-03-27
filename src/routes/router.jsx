@@ -8,6 +8,7 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import BeARider from "../pages/BeARider/BeARider";
+import SendAPercel from "../pages/SendAPercel/SendAPercel";
 // import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -21,6 +22,11 @@ export const router = createBrowserRouter([
           path: "be-rider",
           element: <PrivateRoute><BeARider></BeARider></PrivateRoute>
         },
+        {
+          path: "send-percel",
+          element: <PrivateRoute><SendAPercel></SendAPercel></PrivateRoute>
+        }
+        ,
         {
           path: "/coverage", 
           Component: Coverage,
