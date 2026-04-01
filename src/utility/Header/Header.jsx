@@ -112,7 +112,7 @@ const Header = () => {
           </NavLink></div>
           }
           {
-            user && <div> <button  onClick={handleLogOut}
+            user && <div className='flex items-center gap-2 sm:gap-3'> <button  onClick={handleLogOut}
             
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-white rounded-2xl"
           >

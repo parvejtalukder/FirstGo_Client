@@ -9,6 +9,7 @@ import Register from "../pages/Auth/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import BeARider from "../pages/BeARider/BeARider";
 import SendAPercel from "../pages/SendAPercel/SendAPercel";
+// import Dashboard from ".."
 // import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -24,7 +25,8 @@ export const router = createBrowserRouter([
         },
         {
           path: "send-percel",
-          element: <PrivateRoute><SendAPercel></SendAPercel></PrivateRoute>
+          element: <PrivateRoute><SendAPercel></SendAPercel></PrivateRoute>,
+          loader: () => fetch("/locations.json").then(res => res.json())
         }
         ,
         {
@@ -47,5 +49,10 @@ export const router = createBrowserRouter([
         Component: Register
       }
     ]
+  }
+  ,
+  {
+    path: "/dashboard",
+    // element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
   }
 ]);
