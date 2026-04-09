@@ -9,6 +9,11 @@ import Register from "../pages/Auth/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import BeARider from "../pages/BeARider/BeARider";
 import SendAPercel from "../pages/SendAPercel/SendAPercel";
+import Dashboard from "../layouts/Dashboard/Dashboard";
+import MyParcels from "../pages/Dashboard/MyParcel/MyParcels";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import Success from "../pages/Dashboard/Payment/Success";
+import Failed from "../pages/Dashboard/Payment/Failed";
 // import Dashboard from ".."
 // import PrivateRoute from "./PrivateRoute";
 
@@ -53,6 +58,27 @@ export const router = createBrowserRouter([
   ,
   {
     path: "/dashboard",
-    // element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
+      {
+        path: "my-parcels",
+        Component: MyParcels,
+      }
+      ,
+      {
+        path: "payment-success",
+        Component: Success
+      }
+      ,
+      {
+        path: "payment-failed",
+        Component: Failed
+      }
+      ,
+      {
+        path: "payment/:parcelId",
+        Component: Payment
+      }
+    ]
   }
 ]);

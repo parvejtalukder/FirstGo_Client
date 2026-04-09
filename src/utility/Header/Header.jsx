@@ -11,18 +11,18 @@ const Header = () => {
   const Links = [
     { name: "Home", to: "/" },
     { name: "Coverage", to: "/coverage" },
+    { name: "Send Percel", to: "/send-percel" },
     { name: "About Us", to: "/about" },
     { name: "Pricing", to: "/pricing" },
-    { name: "Send Percel", to: "/send-percel" },
-    { name: "Contact", to: "/contact" },
+    { name: "Contact", to: "/contact" }
   ];
   const LinksLoggedIn = [
     { name: "Home", to: "/" },
     { name: "Coverage", to: "/coverage" },
     { name: "Send Percel", to: "/send-percel" },
     { name: "Track Percel", to: "/track-percel" },
-    { name: "Blog", to: "/blog" },
-    { name: "Contact", to: "/contact" },
+    { name: "Became Merchant", to: "/became-merchant" },
+    // { name: "Contact", to: "/contact" },
   ];
 
   const handleLogOut = () => {
@@ -117,11 +117,11 @@ const Header = () => {
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-white rounded-2xl"
           >
             LogOut
-          </button> <NavLink to={"/be-rider"}  
+          </button> <NavLink to={"/dashboard"}  
             
             className="btn px-3 sm:px-4 py-2 sm:py-3 font-bold text-sm sm:text-base text-[#0B0B0B] bg-primary rounded-2xl"
           >
-            Be Rider
+            Dashboard
           </NavLink> </div>
           }
 

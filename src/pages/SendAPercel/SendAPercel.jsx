@@ -46,6 +46,8 @@ const SendAPercel = () => {
             }
         }
 
+        data.cost = cost;
+
         Swal.fire({
           title: "Do you agree with our cost?",
           text: "Your Charge is " + cost + " BDT",
@@ -92,7 +94,7 @@ const SendAPercel = () => {
                     <fieldset className="fieldset">
                       <label className="label text-black">Percel Name</label>
                       <input type="text" className="input w-full text-black" placeholder="Percel Name" {
-                        ...register('percelName')
+                        ...register('parcelName')
                       } />
                     </fieldset>
                     <fieldset className="fieldset">
