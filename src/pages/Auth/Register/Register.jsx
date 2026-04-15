@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
-import axios from 'axios';
+// import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Register = () => {
 
@@ -10,7 +11,8 @@ const Register = () => {
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser, updateUser } = useAuth();
+    const { user, registerUser, updateUser } = useAuth();
+    const axios = useAxiosSecure();
 
     const handleRegistration = (data) => {
 
@@ -38,6 +40,24 @@ const Register = () => {
 
                     updateUser(userProfile)
                     .then(updateRes => {
+
+                        const userInfo = {
+                            uid: user.uid,
+                            displayName: user.displayName,
+                            photoURL: user.photoURL,
+                            email: user.email,
+                        }
+
+                        axios.post("/user", userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                console.log("User in db");
+                            } 
+                        })
+                        .catch((err) => {
+                            console.log("Error ", err);
+                        })
+
                         console.log("Image uploaded!", updateRes);
                         navigate(location?.state || "/");
                     })

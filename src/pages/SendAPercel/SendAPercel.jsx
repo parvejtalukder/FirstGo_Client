@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
@@ -13,6 +13,7 @@ const SendAPercel = () => {
 
     const { user } = useAuth();
     const axios = useAxiosSecure();
+    const goto = useNavigate();
 
     const serviceCenter = useLoaderData();
     const dataRegions = serviceCenter.map((center) => center.region);
@@ -61,7 +62,17 @@ const SendAPercel = () => {
             try {
               axios.post("/parcels", data)
               .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Parcel placed, go for Pay..",
+                    showConfirmButton: false,
+                    timer: 2500
+                  });
+                }
+                goto("/dashboard/my-parcels");
               })
             } catch (error) {
               console.log(error);
