@@ -2,14 +2,48 @@ import React, { useState } from 'react';
 import Image from '../../assets/agent-pending.png'
 import { useForm } from 'react-hook-form';
 import { MdError } from 'react-icons/md';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const BeARider = () => {
-
+    
+    const { user } = useAuth();
+    const axios = useAxiosSecure();
     const [ selectedDivision, setDivision ] = useState("");
     const { register, handleSubmit, formState: {errors} } = useForm();
 
-    const registerRider = () => {
+    const registerRider = (data) => {
+        data.email = user.email;
+        // console.log(data);
+        axios.post("/be-a-rider", data)
+        .then((res) => {
+            if (res.data.insertedId) {
+                Swal.fire({
+                    title: "Application sent successfully",
+                    icon: "success",
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
 
+            }
+        })
+        .catch((err) => {
+            Swal.fire({
+                title: "Application Submission Error!",
+                icon: "warning",
+                text: err,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+
+        })
     }
 
     const bangladesh = {
@@ -96,8 +130,6 @@ const BeARider = () => {
     };
     const divisions = Object.keys(bangladesh);
 
-
-
     return (
         <div className='p-5 m-5 lg:p-8 lg:my-10 bg-white rounded-2xl flex flex-col gap-4'>
             <div className='max-w-2xl'>
@@ -113,7 +145,7 @@ const BeARider = () => {
                                 <label className="label">Name</label>
                                 <input type="text" {
                                     ...register("name", {required: true})
-                                } className="input w-full" placeholder="Name" />
+                                } className="input w-full" disabled value={user.displayName} placeholder="Name" />
                                 {errors.name?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your Name.</p></span>}
                                 
                                 <label className="label">Driving Licence</label>
@@ -122,11 +154,23 @@ const BeARider = () => {
                                 } className="input w-full" placeholder="Driving Licence" />
                                 {errors.licence?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your Driving Licence.</p></span>}
 
-                                <label className="label">Email</label>
-                                <input type="email" {
-                                    ...register("email", {required: true})
-                                } className="input w-full" placeholder="Email" />
-                                {errors.email?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your Email.</p></span>}
+                                <label className="label">NID</label>
+                                <input type="number" {
+                                    ...register("nid", {required: true})
+                                } className="input w-full" placeholder="NID" />
+                                {errors.email?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your NID.</p></span>}
+
+                                <label className="label">Bike</label>
+                                <input type="text" {
+                                    ...register("bike", {required: true})
+                                } className="input w-full" placeholder="Bike ID" />
+                                {errors.email?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your Bike ID.</p></span>}
+
+                                <label className="label">Address</label>
+                                <input type="text" {
+                                    ...register("address", {required: true})
+                                } className="input w-full" placeholder="Your full address" />
+                                {errors.email?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your Address.</p></span>}
 
                                 <label className="label">Region</label>
                                 <select

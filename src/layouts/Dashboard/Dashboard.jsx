@@ -1,8 +1,9 @@
 import { ShoppingBag } from 'lucide-react';
 import React from 'react';
 import { BiShoppingBag } from 'react-icons/bi';
-import { FiCreditCard, FiShoppingBag } from 'react-icons/fi';
+import { FiCreditCard, FiPower, FiShoppingBag } from 'react-icons/fi';
 import { Link, NavLink, Outlet } from 'react-router';
+import { MdDeliveryDining } from "react-icons/md";
 
 const Dashboard = () => {
     return (
@@ -49,6 +50,13 @@ const Dashboard = () => {
                     <NavLink to={"/dashboard/payment-history"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
                         <span className='w-6 h-full'><FiCreditCard></FiCreditCard></span>
                         <span className="is-drawer-close:hidden">Payment History</span>
+                    </NavLink>
+                </li>
+
+                <li>
+                    <NavLink to={"/dashboard/approve-riders"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders">
+                        <span className='w-6 h-full'><MdDeliveryDining></MdDeliveryDining></span>
+                        <span className="is-drawer-close:hidden">Approve Riders</span>
                     </NavLink>
                 </li>
 
