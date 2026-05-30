@@ -26,7 +26,7 @@ const PaymentHistory = () => {
                     <th>No.</th>
                     <th>Parcel Name</th>
                     <th>Transaction Id</th>
-                    <th>Parcel Id</th>
+                    <th>Tracking Id</th>
                     <th>Amount</th>
                     <th>Date</th>
                   </tr>
@@ -38,7 +38,7 @@ const PaymentHistory = () => {
                         <th>{idx + 1}</th>
                         <td>{payment.parcelName}</td>
                         <td>{payment.transactionId}</td>
-                        <td>{payment.parcelId}</td>
+                        <td>{payment.trackingId || "FGO-12345678"}</td>
                         <td>{payment.amount} ({payment.currency})</td>
                         <td>{payment.paidAt}</td>
                     </tr>

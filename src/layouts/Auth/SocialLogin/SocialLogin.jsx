@@ -8,6 +8,7 @@ const SocialLogin = () => {
     const navigate = useNavigate();
     const axios = useAxiosSecure();
     const { goWithGoogle } = useAuth();
+    
     const handleGo = () => [
         goWithGoogle()
         .then(res => {
