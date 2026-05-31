@@ -79,6 +79,7 @@ const MyParcels = () => {
                     <th>Weight (KG)</th>
                     <th>Cost (BDT)</th>
                     <th>Delivery Status</th>
+                    <th>Tracking ID</th>
                     <th>Payment</th>
                     <th>CreatedAt</th>
                     {/* <th>Payment</th> */}
@@ -94,7 +95,8 @@ const MyParcels = () => {
                         <td>{parcel.parcelType}</td>
                         <td>{parcel.parcelWeight}</td>
                         <td>{parcel.cost} </td>
-                        <td>{`${parcel.deliveryStatus == "pending" ? "Pending" : "Completed"}`}</td>
+                        <td>{parcel.deliveryStatus}</td>
+                        <td>{parcel.trackingId}</td>
                         <td>
                           {
                             parcel.paymentStatus === "pending"
