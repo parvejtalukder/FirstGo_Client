@@ -24,15 +24,16 @@ const SocialLogin = () => {
             .then(res => {
                 navigate(from, { replace: true });
                 if (res.data.insertedId) {
-                    navigate(from, { replace: true });
+                    // navigate(from, { replace: true });
                     console.log("User in db");
                 } 
             })
             .catch((err) => {
-                 navigate(from, { replace: true });
+                //  navigate(from, { replace: true });
                 console.log("Error ", err);
             })
             // navigate(location?.state || "/");
+            navigate(from, { replace: true });
         })
         .catch(err => {
             console.log(err)
