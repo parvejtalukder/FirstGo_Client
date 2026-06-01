@@ -13,6 +13,7 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user, registerUser, updateUser } = useAuth();
     const axios = useAxiosSecure();
+    const from = location.state?.from?.pathname || "/";
 
     const handleRegistration = (data) => {
 
@@ -59,7 +60,7 @@ const Register = () => {
                         })
 
                         console.log("Image uploaded!", updateRes);
-                        navigate(location?.state || "/");
+                        navigate(from, { replace: true });
                     })
                     .catch(uploadErr => {
                         console.log(uploadErr);

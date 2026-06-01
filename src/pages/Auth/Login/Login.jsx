@@ -9,12 +9,13 @@ const Login = () => {
         const { signInUser } = useAuth();
         const location = useLocation();
         const navigate = useNavigate();
+        const from = location.state?.from?.pathname || "/";
     
         const handleLogin = (data) => {
             signInUser(data.email, data.password)
                 .then(res => {
                     console.log(res.user);
-                    navigate(location?.state || "/");
+                     navigate(from, { replace: true });
                 })
                 .catch(err => {
                     console.log(err);

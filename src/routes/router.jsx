@@ -23,6 +23,7 @@ import RiderRoute from "./RiderRoute";
 import AssignedTasks from "../pages/Dashboard/AssignedTasks/AssignedTasks";
 import DeliveredTasks from "../pages/Dashboard/DeliveredTasks/DeliveredTasks";
 import TrackAParcel from "../pages/TrackAParcel/TrackAParcel";
+import Index from "../pages/Dashboard/Index/Index";
 // import Dashboard from ".."
 // import PrivateRoute from "./PrivateRoute";
 
@@ -74,6 +75,11 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
+      {
+        index: true, 
+        Component: Index,
+      }
+      ,
       {
         path: "my-parcels",
         Component: MyParcels,

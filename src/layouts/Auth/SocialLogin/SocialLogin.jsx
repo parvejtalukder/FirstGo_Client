@@ -8,6 +8,7 @@ const SocialLogin = () => {
     const navigate = useNavigate();
     const axios = useAxiosSecure();
     const { goWithGoogle } = useAuth();
+    const from = location.state?.from?.pathname || "/";
     
     const handleGo = () => {
         goWithGoogle()
@@ -21,13 +22,14 @@ const SocialLogin = () => {
             }
             axios.post("/user", userInfo)
             .then(res => {
+                navigate(from, { replace: true });
                 if (res.data.insertedId) {
-                    navigate(location?.state || "/");
+                    navigate(from, { replace: true });
                     console.log("User in db");
                 } 
             })
             .catch((err) => {
-                navigate(location?.state || "/");
+                 navigate(from, { replace: true });
                 console.log("Error ", err);
             })
             // navigate(location?.state || "/");

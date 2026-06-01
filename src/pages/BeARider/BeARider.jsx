@@ -145,7 +145,7 @@ const BeARider = () => {
                                 <label className="label">Name</label>
                                 <input type="text" {
                                     ...register("name", {required: true})
-                                } className="input w-full" disabled value={user.displayName} placeholder="Name" />
+                                } className="input w-full" disabled value={user?.displayName} placeholder="Name" />
                                 {errors.name?.type == "required" && <span className='flex items-start justify-start'><MdError></MdError> <p className="text-red-600">Please Enter Your Name.</p></span>}
                                 
                                 <label className="label">Driving Licence</label>
