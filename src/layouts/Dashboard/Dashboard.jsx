@@ -4,7 +4,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 import { FiCreditCard, FiPower, FiShoppingBag } from 'react-icons/fi';
 import { Link, NavLink, Outlet } from 'react-router';
 import { MdDeliveryDining } from "react-icons/md";
-import { FaUsers } from 'react-icons/fa';
+import { FaBoxes, FaCheckCircle, FaUsers } from 'react-icons/fa';
 import useRole from '../../hooks/useRole';
 import { RiEBikeFill } from "react-icons/ri";
 
@@ -61,6 +61,32 @@ const Dashboard = () => {
                     </NavLink>
                 </li>
 
+                {/* rider only */}
+                {
+                  !isLoading && role.role === "rider" && <>
+                                  <li>
+                    <NavLink to={"/dashboard/assigned-tasks"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assigned Tasks">
+                        <span className='w-6 h-full'><FaBoxes></FaBoxes></span>
+                        <span className="is-drawer-close:hidden">Assigned Tasks</span>
+                    </NavLink>
+                </li>
+                                  <li>
+                    <NavLink to={"/dashboard/delivered-tasks"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Delivered Tasks">
+                        <span className='w-6 h-full'><FaCheckCircle></FaCheckCircle></span>
+                        <span className="is-drawer-close:hidden">Delivered Tasks</span>
+                    </NavLink>
+                </li>
+
+                {/* <li>
+                    <NavLink to={"/dashboard/assign-riders"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assign Riders">
+                        <span className='w-6 h-full'><RiEBikeFill></RiEBikeFill></span>
+                        <span className="is-drawer-close:hidden">Assign Riders</span>
+                    </NavLink>
+                </li> */}
+                  </>
+                }
+
+                {/* admin only */}
                 {
                   !isLoading && role.role === "admin" && <>
                                   <li>

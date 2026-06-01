@@ -9,7 +9,7 @@ const SocialLogin = () => {
     const axios = useAxiosSecure();
     const { goWithGoogle } = useAuth();
     
-    const handleGo = () => [
+    const handleGo = () => {
         goWithGoogle()
         .then(res => {
             const user = res.user;
@@ -35,7 +35,7 @@ const SocialLogin = () => {
         .catch(err => {
             console.log(err)
         })
-    ]
+    }
 
     return (
 

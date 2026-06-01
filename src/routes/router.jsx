@@ -19,6 +19,10 @@ import ApproveRiders from "../pages/Dashboard/ApproveRiders/ApproveRiders";
 import UsersManagement from "../pages/Dashboard/UsersManagement/UsersManagement";
 import AdminRoute from "./AdminRoute";
 import AssignRiders from "../pages/Dashboard/AssignRiders/AssignRiders";
+import RiderRoute from "./RiderRoute";
+import AssignedTasks from "../pages/Dashboard/AssignedTasks/AssignedTasks";
+import DeliveredTasks from "../pages/Dashboard/DeliveredTasks/DeliveredTasks";
+import TrackAParcel from "../pages/TrackAParcel/TrackAParcel";
 // import Dashboard from ".."
 // import PrivateRoute from "./PrivateRoute";
 
@@ -43,6 +47,11 @@ export const router = createBrowserRouter([
           path: "/coverage", 
           Component: Coverage,
           loader: () => fetch("/locations.json").then(res => res.json())
+        }
+        , {
+          path: "track-percel/:trackingId",
+          element: <TrackAParcel></TrackAParcel>,
+
         }
     ]
   },
@@ -89,6 +98,7 @@ export const router = createBrowserRouter([
         path: "payment-history",
         Component: PaymentHistory
       },
+      // admin only
       {
         path: "approve-riders",
         // Component: ApproveRiders
@@ -105,6 +115,15 @@ export const router = createBrowserRouter([
         path: "assign-riders",
         // Component: UsersManagement
         element: <AdminRoute><AssignRiders></AssignRiders></AdminRoute>
+      }
+      // rider only
+      , {
+        path: "assigned-tasks",
+        element: <RiderRoute><AssignedTasks></AssignedTasks></RiderRoute>
+      }
+      , {
+        path: "delivered-tasks",
+        element: <RiderRoute><DeliveredTasks></DeliveredTasks></RiderRoute>
       }
     ]
   }

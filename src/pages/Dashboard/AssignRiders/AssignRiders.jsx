@@ -1,13 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useRef } from 'react';
+import { QueryClient, useQuery } from '@tanstack/react-query';
+import React, { useRef, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const AssignRiders = () => {
 
     const axios = useAxiosSecure();
     const riderRef = useRef();
+    const [selectedParcel, setSelectedParcel] = useState(null);
 
-    const { data: parcels = [] } = useQuery({
+    const { data: parcels = [], refetch: parcelRefetch } = useQuery({
         queryKey: ["parcels", "pending-pickup"],
         queryFn: async () => {
             const res = await axios.get(`/parcels?deliveryStatus=pending-pickup`);
@@ -15,8 +17,56 @@ const AssignRiders = () => {
         }
     })
 
+    const { data: riders = [] } = useQuery({
+      queryKey: ["riders", selectedParcel?.senderDistrict, 'available'],
+      enabled: !!selectedParcel,
+      queryFn: async () => {
+        const res = await axios.get(`/riders?status=approved&district=${selectedParcel.senderDistrict}&workStatus=available`);
+        return res.data;
+      }
+    })
+
     const handleAssing = (parcel) => {
-        riderRef.current.showModal();
+      setSelectedParcel(parcel);
+      riderRef.current.showModal();
+    }
+
+    const handleRider = (rider) => {
+      console.log(rider);
+      console.log(selectedParcel);
+      const riderInfo = { 
+        riderId: rider._id,
+        riderEmail: rider.email,
+        riderName: rider.name,
+        parcelId: selectedParcel._id,
+      ridertrackingId: selectedParcel.trackingId,
+       }
+      axios.patch(`/parcels/${selectedParcel._id}`, riderInfo)
+      .then(res => {
+        console.log("CALLED")
+        console.log(res);
+        if (res.data.modifiedCount) {
+          riderRef.current.close();
+          parcelRefetch();
+          Swal.fire({
+            position: "top-right",
+            title: "Rider Assigned!",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          })
+        }
+      })
+      .catch(err => {
+        Swal.fire({
+            position: "top-right",
+            title: "Rider Assigning Issued!",
+            text: err,
+            icon: "warning",
+            timer: 2000,
+            showConfirmButton: false,
+        })
+      })
     }
 
     return (
@@ -50,25 +100,49 @@ const AssignRiders = () => {
                                   <td>{parcel.senderDistrict}</td>
                                   <td>{parcel.createdAt}</td>
                                   {/* <td>Quality Control Specialist</td> */}
-                                  <td><button onClick={() => handleAssing(parcel)} className='btn'>Assign</button></td>
+                                  <td><button onClick={() => handleAssing(parcel)} className='btn'>Find Riders</button></td>
                                 </tr>
                             )
                         }
                     </tbody>
                   </table>
                 </div>
-            <dialog ref={riderRef} className="modal modal-bottom sm:modal-middle">
-              <div className="modal-box">
-                <h3 className="font-bold text-lg">Hello!</h3>
-                <p className="py-4">Press ESC key or click the button below to close</p>
-                <div className="modal-action">
-                  <form method="dialog">
-                    {/* if there is a button in form, it will close the modal */}
-                    <button className="btn">Close</button>
-                  </form>
-                </div>
-              </div>
-            </dialog>
+                <dialog ref={riderRef} className="modal modal-bottom sm:modal-middle">
+                  <div className="modal-box max-w-3xl">
+                    <h3 className="font-bold text-lg mb-4">
+                      Riders ({riders.length})
+                    </h3>  
+                    <div className="overflow-x-auto">
+                      <table className="table table-zebra w-full">
+                        <thead>
+                          <tr>
+                            <th>SL.</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {riders.map((rider, index) => (
+                            <tr key={rider._id || index}>
+                              <td>{index + 1}</td>
+                              <td>{rider.name}</td>
+                              <td>{rider.email}</td>
+                              <td>
+                                <button onClick={() => handleRider(rider)} className='btn btn-info' >Assign</button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="modal-action">
+                      <form method="dialog">
+                        <button className="btn">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
             </div>
         </div>
     );
