@@ -2,7 +2,7 @@
 
 **ZapShift Client** is a modern, responsive React-based frontend application for the ZapShift Parcel Management System. It provides a seamless user experience for booking parcels, tracking deliveries, and managing shipments with role-based access control for users, admins, and riders.
 
-**Live Demo:** https://the-first-go.vercel.app
+**Live Demo:** https://pht-first-go.web.app/
 
 ---
 
